@@ -1,6 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import useSWR from "swr";
 import Header from "../components/header";
 import ActivityTable from "../components/activityTable";
+
+const fetcher = (url: string) => fetch(url).then(res => res.json());
 
 const ActivityLog: React.FC = () => {
     const [activities, setActivities] = useState<any[]>([]);
@@ -9,6 +12,36 @@ const ActivityLog: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [loadingMore, setLoadingMore] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const mapDate = (dateToBeMapped: any) => {
+        return new Date(dateToBeMapped).toLocaleString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            hour: 'numeric',
+            minute: 'numeric',
+            hour12: true
+        });
+    };
+
+    const { data, error } = useSWR(
+        `${process.env.REACT_APP_BACKEND_API_URL}?page=${page}&limit=5&search=${searchTerm}`,
+        fetcher
+    );
+
+    useEffect(() => {
+        if (data) {
+            data.events = data.events.map((event: any) => {
+                return {
+                    ...event,
+                    occurred_at: mapDate(event.occurred_at)
+                };
+            });
+            setActivities(prevActivities => page === 1 ? data.events : [...prevActivities, ...data.events]);
+            setTotalCount(data.totalCount);
+            setLoading(false);
+            setLoadingMore(false);
+        }
+    }, [data, page]);
 
     const handleSearch = (event: any) => {
         event.preventDefault();
@@ -22,6 +55,8 @@ const ActivityLog: React.FC = () => {
         setLoadingMore(true);
         setPage(prevPage => prevPage + 1);
     };
+
+    if (error) return <div>Failed to load activities</div>;
 
     return (
         <section className="container mx-auto my-4 border rounded-lg">
