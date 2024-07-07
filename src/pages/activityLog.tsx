@@ -12,7 +12,14 @@ const ActivityLog: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [loadingMore, setLoadingMore] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
-    const [filter, setFilter] = useState<any>({});
+    const [filter, setFilter] = useState<any>({
+        actor_id: '',
+        actor_name: '',
+        target_id: '',
+        target_name: '',
+        action_id: '',
+        action_name: ''
+    });
 
     const mapDate = (dateToBeMapped: any) => {
         return new Date(dateToBeMapped).toLocaleString('en-US', {
@@ -52,6 +59,16 @@ const ActivityLog: React.FC = () => {
         setActivities([]);
     };
 
+    const applyFilter = (event: any, field: string) => {
+        setLoading(true);
+        setPage(1);
+        setActivities([]);
+        setFilter((prev: any) => ({
+            ...prev,
+            [field]: event.target.value.trim()
+        }));
+    };
+
     const loadMore = () => {
         setLoadingMore(true);
         setPage(prevPage => prevPage + 1);
@@ -61,7 +78,7 @@ const ActivityLog: React.FC = () => {
 
     return (
         <section className="container mx-auto my-4 border rounded-lg">
-            <Header activities={activities} loading={loading} loadingMore={loadingMore} handleSearch={handleSearch} />
+            <Header activities={activities} loading={loading} loadingMore={loadingMore} handleSearch={handleSearch} filter={filter} applyFilter={applyFilter} />
             <ActivityTable activities={activities} loading={loading} loadingMore={loadingMore} />
             {
                 !activities.length && !loading ? (

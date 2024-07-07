@@ -46,7 +46,7 @@ router
                 ];
             }
 
-            if (filter && filter !== '{}') {
+            if (filter) {
                 const filterObj = JSON.parse(filter as string);
                 if (filterObj.actor_id) whereClause.actor_id = { contains: filterObj.actor_id };
                 if (filterObj.actor_name) whereClause.actor_name = { contains: filterObj.actor_name };
