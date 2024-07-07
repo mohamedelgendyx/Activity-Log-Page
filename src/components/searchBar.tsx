@@ -7,7 +7,7 @@ const SearchBar: React.FC<any> = ({ handleSearch }) => {
                 type="text"
                 placeholder="Search name, email or action..."
                 className="w-full p-2 text-sm border rounded-l-lg bg-transparent focus:outline-none"
-                onChange={(e) => handleSearch(e.target.value.trim())}
+                onChange={(e) => handleSearch(e)}
             />
         </section>
     );
