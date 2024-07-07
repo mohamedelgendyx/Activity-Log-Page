@@ -74,7 +74,7 @@ const ActivityLog: React.FC = () => {
         setPage(prevPage => prevPage + 1);
     };
 
-    if (error) return <div>Failed to load activities</div>;
+    if (error) return <div className="uppercase text-md pt-[45vh] w-full m-auto font-semibold text-[#616161] text-center">Failed to load activities</div>;
 
     return (
         <section className="container mx-auto my-4 border rounded-lg">
