@@ -12,6 +12,7 @@ const ActivityLog: React.FC = () => {
     const [loading, setLoading] = useState<boolean>(true);
     const [loadingMore, setLoadingMore] = useState<boolean>(false);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [filter, setFilter] = useState<any>({});
 
     const mapDate = (dateToBeMapped: any) => {
         return new Date(dateToBeMapped).toLocaleString('en-US', {
@@ -24,7 +25,7 @@ const ActivityLog: React.FC = () => {
     };
 
     const { data, error } = useSWR(
-        `${process.env.REACT_APP_BACKEND_API_URL}?page=${page}&limit=5&search=${searchTerm}`,
+        `${process.env.REACT_APP_BACKEND_API_URL}?page=${page}&limit=5&search=${searchTerm}&filter=${JSON.stringify(filter)}`,
         fetcher
     );
 
