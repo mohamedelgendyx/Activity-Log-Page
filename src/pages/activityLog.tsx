@@ -48,7 +48,7 @@ const ActivityLog: React.FC = () => {
         event.preventDefault();
         setLoading(true);
         setPage(1);
-        setSearchTerm(event.target.value);
+        setSearchTerm(event.target.value.trim());
         setActivities([]);
     };
 
