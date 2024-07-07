@@ -1,46 +1,54 @@
-# Getting Started with Create React App
+# Instatus - Activity Log Page
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A general solution for tracking and managing activity logs in various applications. It allows admins to monitor and analyze user actions within their teams. This document outlines the features, tech stack, and implementation details.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Track and log various events and actions users perform in the application.
+- View and analyze activity logs with pagination, search, and filtering options.
+- Backend endpoints for creating and retrieving events.
+- Additional bonus features include filtering rows and exporting to CSV.
 
-### `npm start`
+## Tech Stack
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Backend
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+- Language: TypeScript
+- ORM: Prisma
+- Framework: Node.js (Express.js)
+- Database: Postgres
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- Framework: Raact.js
+- Styling: TailwindCSS
+- Data Fetching: SWR
 
-### `npm run build`
+## Implementation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend Endpoints
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **POST api/events**: Endpoint for creating new events.
+- **GET api/events**: Endpoint for retrieving events.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Frontend Functionality
 
-### `npm run eject`
+The frontend interface allows users to interact with the activity logs.
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- **Listing**: Display a list of activity logs with pagination.
+- **Details**: Show detailed information about a specific event.
+- **Load More**: Load additional logs when requested.
+- **Search**: Search for specific events based on keywords.
+- **Filter Rows**: Filter logs based on actor ID, target ID, action ID, and/or name.
+- **Export to CSV**: Option to export logs to a CSV file.
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Design
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+About the design, please refer to the [Figma Activity Log Design](https://www.figma.com/file/rygmKpkjsqVW4sB503TOOl/Activity-Log?node-id=0%3A1) file.
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
 
-## Learn More
+[Live Link](https://activity-log-page.vercel.app)
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+---
+
