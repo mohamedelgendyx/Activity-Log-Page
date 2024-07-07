@@ -1,7 +1,16 @@
+import { useState } from "react";
+import DetailedActivityRow from "./ActivityDetails";
+
 const ActivityTableRow = ({ activity }: any) => {
+    const [expanded, setExpanded] = useState(false);
+
+    const toggleExpanded = () => {
+        setExpanded(!expanded);
+    };
+
     return (
         <>
-            <tr className="hover:bg-[#FBFBFB] cursor-pointer">
+            <tr className="hover:bg-[#FBFBFB] cursor-pointer" onClick={toggleExpanded}>
                 <td className="text-sm px-2 py-4 pl-4 flex items-center gap-x-3">
                     <div className={`w-6 h-6 rounded-full text-xs text-white font-semibold flex items-center justify-center`}>
                         {activity.target_name[0].toUpperCase()}
@@ -18,6 +27,7 @@ const ActivityTableRow = ({ activity }: any) => {
                     <img src={require('../assets/expand.svg').default} />
                 </td>
             </tr>
+            <DetailedActivityRow activity={activity} expanded={expanded} />
         </>
     );
 };
