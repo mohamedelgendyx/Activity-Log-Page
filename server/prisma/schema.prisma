@@ -1,0 +1,23 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Event {
+  id          String    @id
+  object      String
+  actor_id    String
+  actor_name  String
+  group       String
+  target_id   String
+  target_name String
+  location    String
+  occurred_at DateTime  @default(now())
+  action      Json
+  metadata    Json
+}
