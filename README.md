@@ -1,1 +1,1 @@
-# Activity-Log-Page
+# Activity Log Page
